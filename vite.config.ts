@@ -27,6 +27,18 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+
+    // ✅ Increase chunk warning threshold
+    chunkSizeWarningLimit: 1000, // in kB (1 MB)
+
+    // ✅ Optional: split large vendor packages into separate chunks
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom"], // You can customize this
+        },
+      },
+    },
   },
   server: {
     fs: {
