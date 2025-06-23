@@ -9,7 +9,7 @@ interface User {
 }
 
 export function useAuth() {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<{ user?: User }>({
     queryKey: ["/api/auth/me"],
     queryFn: getQueryFn({ on401: "returnNull" }),
     retry: false,
