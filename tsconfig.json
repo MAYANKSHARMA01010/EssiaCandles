@@ -1,7 +1,8 @@
 {
-  "include": ["src/**/*", "shared/**/*", "server/**/*", "vite.config.ts"],
+  "include": ["src/**/*", "shared/**/*", "server/**/*", "vite.config.mts"],
   "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
   "compilerOptions": {
+    "target": "es2017",
     "incremental": true,
     "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
     "noEmit": true,
