@@ -9,7 +9,19 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { loginSchema, type LoginData } from "@shared/schema";
+import { z } from "zod";
+
+// Define the LoginData type for form values
+type LoginData = {
+  email: string;
+  password: string;
+};
+
+// Zod schema for login form validation
+const loginSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }),
+  password: z.string().min(6, { message: "Password must be at least 6 characters" }),
+});
 
 export default function Login() {
   const [, setLocation] = useLocation();
@@ -66,7 +78,7 @@ export default function Login() {
                 <FormField
                   control={form.control}
                   name="email"
-                  render={({ field }) => (
+                  render={({ field }: { field: any }) => (
                     <FormItem>
                       <FormLabel className="text-purple-800 dark:text-purple-200">Email</FormLabel>
                       <FormControl>
@@ -84,7 +96,7 @@ export default function Login() {
                 <FormField
                   control={form.control}
                   name="password"
-                  render={({ field }) => (
+                  render={({ field }: { field: any }) => (
                     <FormItem>
                       <FormLabel className="text-purple-800 dark:text-purple-200">Password</FormLabel>
                       <FormControl>

@@ -5,7 +5,17 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { ProductCard } from '@/components/product-card';
 import { Skeleton } from '@/components/ui/skeleton';
-import type { Product } from '@shared/schema';
+
+// Define the Product type
+type Product = {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+  inStock: boolean;
+  // Add other fields as needed, e.g. image, description, etc.
+};
 
 export default function Home() {
   const { data: featuredProducts, isLoading } = useQuery<Product[]>({

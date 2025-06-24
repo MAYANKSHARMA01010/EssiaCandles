@@ -11,7 +11,21 @@ import { useCart } from '@/context/cart-context';
 import { formatPrice } from '@/lib/utils';
 import { ArrowLeft, Clock, Package, Leaf } from 'lucide-react';
 import { Link } from 'wouter';
-import type { Product } from '@shared/schema';
+
+// Define the Product type according to your API response structure
+type Product = {
+  id: string;
+  name: string;
+  price: string;
+  image: string;
+  description: string;
+  inStock: boolean;
+  featured?: boolean;
+  scent?: string;
+  size?: string;
+  burnTime?: number;
+  ingredients?: string;
+};
 
 export default function ProductDetail() {
   const [, params] = useRoute('/products/:id');
@@ -30,7 +44,7 @@ export default function ProductDetail() {
     
     setIsAddingToCart(true);
     try {
-      await addToCart(product.id, quantity);
+      await addToCart(Number(product.id), quantity);
       toast({
         title: "Added to Cart",
         description: `${quantity} ${product.name}${quantity > 1 ? 's' : ''} added to your cart.`,
@@ -98,7 +112,7 @@ export default function ProductDetail() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <Link href="/products">
-          <Button variant="ghost" className="mb-8 text-purple-dark hover:text-purple-primary">
+          <Button className="mb-8 text-purple-dark hover:text-purple-primary">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Products
           </Button>
@@ -119,7 +133,7 @@ export default function ProductDetail() {
             )}
             {!product.inStock && (
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center rounded-2xl">
-                <Badge variant="secondary" className="text-white bg-gray-800 text-lg px-4 py-2">
+                <Badge className="text-white bg-gray-800 text-lg px-4 py-2">
                   Out of Stock
                 </Badge>
               </div>
@@ -143,7 +157,7 @@ export default function ProductDetail() {
             {product.scent && (
               <div>
                 <h3 className="font-semibold text-purple-dark mb-2">Scent Profile</h3>
-                <Badge variant="outline" className="text-purple-primary border-purple-primary">
+                <Badge className="text-purple-primary border border-purple-primary">
                   {product.scent}
                 </Badge>
               </div>
@@ -207,7 +221,6 @@ export default function ProductDetail() {
                 onClick={handleAddToCart}
                 disabled={!product.inStock || isAddingToCart}
                 className="w-full bg-purple-primary text-white hover:bg-purple-primary/90 py-3 text-lg font-semibold"
-                size="lg"
               >
                 {isAddingToCart
                   ? 'Adding to Cart...'

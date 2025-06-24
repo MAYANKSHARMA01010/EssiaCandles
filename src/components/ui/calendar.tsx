@@ -13,6 +13,12 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
+  interface CalendarNavbarProps {
+    className?: string;
+    onPreviousClick: () => void;
+    onNextClick: () => void;
+  }
+
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
@@ -51,14 +57,7 @@ function Calendar({
         day_hidden: "invisible",
         ...classNames,
       }}
-      components={{
-        IconLeft: ({ className, ...props }) => (
-          <ChevronLeft className={cn("h-4 w-4", className)} {...props} />
-        ),
-        IconRight: ({ className, ...props }) => (
-          <ChevronRight className={cn("h-4 w-4", className)} {...props} />
-        ),
-      }}
+      // Removed unsupported Navbar override for react-day-picker v8+
       {...props}
     />
   )

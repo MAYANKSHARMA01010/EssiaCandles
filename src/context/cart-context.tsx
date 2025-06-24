@@ -1,8 +1,25 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { getSessionId } from '@/lib/utils';
-import type { CartItem, Product } from '@shared/schema';
+
+// Define CartItem and Product types if not already imported
+type CartItem = {
+  id: number;
+  productId: number;
+  quantity: number;
+  // add other fields as needed
+};
+
+type Product = {
+  image: string | undefined;
+  description: ReactNode;
+  scent: any;
+  id: number;
+  name: string;
+  price: string;
+  // add other fields as needed
+};
 
 interface CartContextType {
   cartItems: (CartItem & { product: Product })[];

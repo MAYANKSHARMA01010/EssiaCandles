@@ -238,7 +238,7 @@ export default function About() {
               </Button>
             </Link>
             <Link href="/contact">
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-purple-primary px-8 py-3 font-semibold">
+              <Button className="border border-white text-white hover:bg-white hover:text-purple-primary px-8 py-3 font-semibold bg-transparent">
                 Contact Us
               </Button>
             </Link>

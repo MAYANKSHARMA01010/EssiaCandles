@@ -7,7 +7,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ProductCard } from '@/components/product-card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Search } from 'lucide-react';
-import type { Product } from '@shared/schema';
+
+// Define the Product type
+type Product = {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+  inStock: boolean;
+  // Add other fields as needed, e.g. image, description, etc.
+};
 
 export default function Products() {
   const [location] = useLocation();
@@ -63,9 +73,9 @@ export default function Products() {
   const sortedProducts = [...products].sort((a, b) => {
     switch (sortBy) {
       case 'price-low':
-        return parseFloat(a.price) - parseFloat(b.price);
+        return a.price - b.price;
       case 'price-high':
-        return parseFloat(b.price) - parseFloat(a.price);
+        return b.price - a.price;
       case 'name':
       default:
         return a.name.localeCompare(b.name);
