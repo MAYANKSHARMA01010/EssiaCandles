@@ -4,6 +4,7 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
+  base: "/",
   plugins: [
     react(),
     runtimeErrorOverlay(),
@@ -27,15 +28,11 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
-
-    // ✅ Increase chunk warning threshold
-    chunkSizeWarningLimit: 1000, // in kB (1 MB)
-
-    // ✅ Optional: split large vendor packages into separate chunks
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ["react", "react-dom"], // You can customize this
+          vendor: ["react", "react-dom"],
         },
       },
     },
