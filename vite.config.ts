@@ -4,7 +4,7 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
-  base: "/", // ✅ ensures correct pathing on Vercel
+  base: "/",
   plugins: [
     react(),
     runtimeErrorOverlay(),
@@ -25,7 +25,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "dist", // ✅ default Vite output; matches Vercel's expected output folder
+    outDir: "dist",
     emptyOutDir: true,
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
